@@ -901,7 +901,10 @@ impl<T: ClientTransport + 'static> CoAPClient<T> {
 
     /// low-level method to send a a request supporting block1 option based on
     /// the block size set in the client
-    async fn send_request(&self, request: &mut CoapRequest<SocketAddr>) -> IoResult<CoapResponse> {
+    pub async fn send_request(
+        &self,
+        request: &mut CoapRequest<SocketAddr>,
+    ) -> IoResult<CoapResponse> {
         let request_length = request.message.payload.len();
         if request_length <= self.block1_size {
             if 0 == request.message.header.message_id {
